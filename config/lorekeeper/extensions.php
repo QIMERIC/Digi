@@ -8,10 +8,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | This enables/disables a selection of extensions which provide QoL and are
-    | broadly applicable, but perhaps not universally, and which are contained 
+    | broadly applicable, but perhaps not universally, and which are contained
     | in scope enough to be readily opt-in.
     |
-    | Extensions with a single value for their setting are enabled/disabled via it 
+    | Extensions with a single value for their setting are enabled/disabled via it
     | and have no additional configuration necessary here. 0 = disabled, 1 = enabled.
     | All of the extensions here are disabled by default.
     |
@@ -20,24 +20,24 @@ return [
     */
 
     // Navbar News Notif - Juni
-    'navbar_news_notif' => 0,
+    'navbar_news_notif' => 1,
 
     // Species Trait Index - Mercury
-    'species_trait_index' => 0,
+    'species_trait_index' => 1,
 
     // Character Status Badges - Juni
-    'character_status_badges' => 0,
-    
+    'character_status_badges' => 1,
+
     // Character TH Profile Link - Juni
-    'character_TH_profile_link' => 0,
+    'character_TH_profile_link' => 1,
 
     // Design Update Voting - Mercury
     'design_update_voting' => 0,
 
     // Item Entry Expansion - Mercury
     'item_entry_expansion' => [
-        'extra_fields' => 0,
-        'resale_function' => 0,
+        'extra_fields' => 1,
+        'resale_function' => 1,
     ]
 
 ];
