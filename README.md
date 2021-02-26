@@ -78,4 +78,4 @@ You will need to send yourself the verification email and then link your dA acco
 
 ## Contact
 
-If you have any questions, please feel free to contact me through email: corowne@gmail.com
+If you have any questions, please feel free to contact me through email: corowne@gmail.com"# Digi" 
