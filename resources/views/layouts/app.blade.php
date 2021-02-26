@@ -49,7 +49,7 @@
     <link href="{{ asset('css/lorekeeper.css') }}" rel="stylesheet">
 
     {{-- Font Awesome --}}
-    <link href="{{ asset('css/all.min.css') }}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ffd12defec.js" crossorigin="anonymous"></script>
 
     {{-- jQuery UI --}}
     <link href="{{ asset('css/jquery-ui.min.css') }}" rel="stylesheet">

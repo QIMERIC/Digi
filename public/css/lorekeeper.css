@@ -104,7 +104,6 @@ main > .row {
 
 .navbar .navbar-brand, .navbar .nav-item {
     text-transform: uppercase;
-    font-family: Roboto Condensed, serif;
 }
 
 .navbar .row { width: 100%; }
@@ -112,7 +111,6 @@ main > .row {
 /* Sidebar */
 
 .sidebar {
-    text-align: right;
     padding-right: 0px;
 }
 
@@ -123,31 +121,30 @@ main > .row {
 }
 
 .sidebar ul li {
-    background-color: white;
-    border-top-left-radius: .25rem;
-    border-bottom-left-radius: .25rem;
-    margin-bottom: 1em;
+    background-color: #222;
     padding: 0.4em 0;
-
-    box-shadow: 0px 0px 6px 3px rgba(0,0,0,0.1);
 }
 
 .sidebar .sidebar-header,
 .sidebar .sidebar-section .sidebar-section-header {
     text-transform: uppercase;
-    font-family: Roboto Condensed, serif;
     font-weight: bold;
 }
 
 .sidebar .sidebar-header {
-    background-color: #343a40;
+    background-color: #2285c7;
 }
+
+.sidebar-top-header{
+  max-height:1.6rem;
+}
+
 .sidebar .sidebar-header a {
     color: white;
 }
 .sidebar .sidebar-header a:hover {
     background-color: transparent;
-    color: rgba(255,255,255,0.8);
+    color: #bfbfbf;
 }
 
 .sidebar a,
@@ -159,11 +156,11 @@ main > .row {
 .sidebar a {
     text-transform: uppercase;
     font-family: Roboto Condensed, serif;
-    color: rgba(0,0,0,0.4);
+    color: white;
 }
 .sidebar a:hover {
-    color: #16181b;
-    background-color: #f8f9fa;
+    color: #ddd;
+    background-color: #000;
 }
 .sidebar a:hover, .sidebar a:active, .sidebar a:focus, .sidebar a:link {
     text-decoration: none;
@@ -172,8 +169,8 @@ main > .row {
     text-decoration: none;
 }
 .sidebar a.active, .sidebar a.active:hover {
-    color: white;
-    background-color: #343a40;
+    color: #ddd;
+    background-color: #000;
 }
 
 .site-mobile-header {

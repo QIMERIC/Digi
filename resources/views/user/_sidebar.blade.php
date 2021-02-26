@@ -1,5 +1,5 @@
 <ul>
-    <li class="sidebar-header"><a href="{{ $user->url }}" class="card-link">{{ Illuminate\Support\Str::limit($user->name, 10, $end='...') }}</a></li>
+    <li class="sidebar-header sidebar-top-header"><a href="{{ $user->url }}">{{ Illuminate\Support\Str::limit($user->name, 10, $end='...') }} <span class="text-right"><i class="fas fa-window-minimize"></i> <i class="fas fa-window-restore"></i> <i class="fas fa-window-close"></i></span></a></li>
     <li class="sidebar-section">
         <div class="sidebar-section-header">Gallery</div>
         <div class="sidebar-item"><a href="{{ $user->url.'/gallery' }}" class="{{ set_active('user/'.$user->name.'/gallery*') }}">Gallery</a></div>
