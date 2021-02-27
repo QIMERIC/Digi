@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light">
+<nav class="navbar navbar-expand-md navbar-light footer-fix">
     <ul class="navbar-nav ml-auto mr-auto">
         <li class="nav-item"><a href="{{ url('info/about') }}" class="nav-link">About</a></li>
         <li class="nav-item"><a href="{{ url('info/terms') }}" class="nav-link">Terms</a></li>
