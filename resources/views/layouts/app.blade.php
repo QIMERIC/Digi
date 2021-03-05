@@ -83,17 +83,17 @@
                 <div class="sidebar col-lg-2" id="sidebar">
                     @yield('sidebar')
                 </div>
-                <div class="main-content col-lg-8 p-4">
-                    <div>
-                        @if(Auth::check() && !Config::get('lorekeeper.extensions.navbar_news_notif'))
-                            @if(Auth::user()->is_news_unread)
-                                <div class="alert alert-info"><a href="{{ url('news') }}">There is a new news post!</a></div>
-                            @endif
-                            @if(Auth::user()->is_sales_unread)
-                                <div class="alert alert-info"><a href="{{ url('sales') }}">There is a new sales post!</a></div>
-                            @endif
-                        @endif
-                        @include('flash::message')
+                <div class="col-lg-8 p-4">
+                  @if(Auth::check() && !Config::get('lorekeeper.extensions.navbar_news_notif'))
+                      @if(Auth::user()->is_news_unread)
+                          <div class="alert alert-info"><a href="{{ url('news') }}">There is a new news post!</a></div>
+                      @endif
+                      @if(Auth::user()->is_sales_unread)
+                          <div class="alert alert-info"><a href="{{ url('sales') }}">There is a new sales post!</a></div>
+                      @endif
+                  @endif
+                  @include('flash::message')
+                    <div class="main-content p-4">
                         @yield('content')
                     </div>
 
