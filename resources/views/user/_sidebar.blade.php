@@ -1,35 +1,68 @@
-<ul>
-    <li class="sidebar-header"><a href="{{ $user->url }}">{{ Illuminate\Support\Str::limit($user->name, 10, $end='...') }}</a></li>
-    <li class="sidebar-section">
-        <div class="sidebar-section-header">Gallery</div>
-        <div class="sidebar-item"><a href="{{ $user->url.'/gallery' }}" class="{{ set_active('user/'.$user->name.'/gallery*') }}">Gallery</a></div>
-        <div class="sidebar-item"><a href="{{ $user->url.'/favorites' }}" class="{{ set_active('user/'.$user->name.'/favorites*') }}">Favorites</a></div>
-        <div class="sidebar-item"><a href="{{ $user->url.'/favorites/own-characters' }}" class="{{ set_active('user/'.$user->name.'/favorites/own-characters*') }}">Own Character Favorites</a></div>
-    </li>
-    <li class="sidebar-section">
-        <div class="sidebar-section-header">User</div>
-        <div class="sidebar-item"><a href="{{ $user->url.'/characters' }}" class="{{ set_active('user/'.$user->name.'/characters*') }}">Characters</a></div>
-        @if(isset($sublists) && $sublists->count() > 0)
-                @foreach($sublists as $sublist)
-                <div class="sidebar-item"><a href="{{ $user->url.'/sublist/'.$sublist->key }}" class="{{ set_active('user/'.$user->name.'/sublist/'.$sublist->key) }}">{{ $sublist->name }}</a></div>
-                @endforeach
-        @endif
-        <div class="sidebar-item"><a href="{{ $user->url.'/myos' }}" class="{{ set_active('user/'.$user->name.'/myos*') }}">MYO Slots</a></div>
-        <div class="sidebar-item"><a href="{{ $user->url.'/inventory' }}" class="{{ set_active('user/'.$user->name.'/inventory*') }}">Inventory</a></div>
-        <div class="sidebar-item"><a href="{{ $user->url.'/bank' }}" class="{{ set_active('user/'.$user->name.'/bank*') }}">Bank</a></div>
-    </li>
-    <li class="sidebar-section">
-        <div class="sidebar-section-header">History</div>
-        <div class="sidebar-item"><a href="{{ $user->url.'/ownership' }}" class="{{ $user->url.'/ownership*' }}">Ownership History</a></div>
-        <div class="sidebar-item"><a href="{{ $user->url.'/item-logs' }}" class="{{ $user->url.'/currency-logs*' }}">Item Logs</a></div>
-        <div class="sidebar-item"><a href="{{ $user->url.'/currency-logs' }}" class="{{ set_active($user->url.'/currency-logs*') }}">Currency Logs</a></div>
-        <div class="sidebar-item"><a href="{{ $user->url.'/submissions' }}" class="{{ set_active($user->url.'/submissions*') }}">Submissions</a></div>
-    </li>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    @if(Auth::check() && Auth::user()->hasPower('edit_user_info') && Auth::user()->canEditRank($user->rank))
-        <li class="sidebar-section">
-            <div class="sidebar-section-header">Admin</div>
-            <div class="sidebar-item"><a href="{{ $user->adminUrl }}">Edit User</a></div>
-        </li>
-    @endif
-</ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left Side Of Navbar -->
+            <ul class="navbar-nav mr-auto mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ $user->url }}">{{ Illuminate\Support\Str::limit($user->name, 10, $end='...') }}</a>
+                </li>
+                    <li class="nav-item dropdown">
+                        <a id="galleryDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            Gallery
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="galleryDropdown">
+                            <a class="dropdown-item" href="{{ $user->url.'/gallery' }}" class="{{ set_active('user/'.$user->name.'/gallery*') }}">
+                                Gallery
+                            </a>
+                            <a class="dropdown-item" href="{{ $user->url.'/favorites' }}" class="{{ set_active('user/'.$user->name.'/favorites*') }}">
+                                Favorites
+                            </a>
+                            <a class="dropdown-item" href="{{ $user->url.'/favorites/own-characters' }}" class="{{ set_active('user/'.$user->name.'/favorites/own-characters*') }}">
+                                Own Character Favorites
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a id="userDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            User
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="{{ $user->url.'/characters' }}" class="{{ set_active('user/'.$user->name.'/characters*') }}">
+                                Characters
+                            </a>
+                            @if(isset($sublists) && $sublists->count() > 0)
+                                    @foreach($sublists as $sublist)
+                                    <a class="dropdown-item" href="{{ $user->url.'/sublist/'.$sublist->key }}" class="{{ set_active('user/'.$user->name.'/sublist/'.$sublist->key) }}">{{ $sublist->name }}</a>
+                                    @endforeach
+                            @endif
+                            <a class="dropdown-item" href="{{ $user->url.'/myos' }}" class="{{ set_active('user/'.$user->name.'/myos*') }}">MYO Slots</a>
+                            <a class="dropdown-item" href="{{ $user->url.'/inventory' }}" class="{{ set_active('user/'.$user->name.'/inventory*') }}">Inventory</a>
+                            <a class="dropdown-item" href="{{ $user->url.'/bank' }}" class="{{ set_active('user/'.$user->name.'/bank*') }}">Bank</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a id="historyDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            History
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="historyDropdown">
+                          <a class="dropdown-item" href="{{ $user->url.'/ownership' }}" class="{{ $user->url.'/ownership*' }}">Ownership History</a>
+                          <a class="dropdown-item" href="{{ $user->url.'/item-logs' }}" class="{{ $user->url.'/currency-logs*' }}">Item Logs</a>
+                          <a class="dropdown-item" href="{{ $user->url.'/currency-logs' }}" class="{{ set_active($user->url.'/currency-logs*') }}">Currency Logs</a>
+                          <a class="dropdown-item" href="{{ $user->url.'/submissions' }}" class="{{ set_active($user->url.'/submissions*') }}">Submimissions</a>
+                        </div>
+                    </li>
+
+                    @if(Auth::check() && Auth::user()->hasPower('edit_user_info') && Auth::user()->canEditRank($user->rank))
+                        <li class="nav-item">
+                            <a href="{{ $user->adminUrl }}" class="nav-link">Edit User</a>
+                        </li>
+                    @endif
+            </ul>
+        </div>

@@ -84,6 +84,22 @@ class AccountController extends Controller
     }
 
     /**
+     * Edits the user's header.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postHeader(Request $request, UserService $service)
+    {
+        if($service->updateHeader($request->file('header'), Auth::user())) {
+            flash('Header image updated successfully.')->success();
+        }
+        else {
+            foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
+        }
+        return redirect()->back();
+    }
+    /**
      * Changes the user's password.
      *
      * @param  \Illuminate\Http\Request  $request

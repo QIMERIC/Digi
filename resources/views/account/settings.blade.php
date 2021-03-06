@@ -20,6 +20,16 @@
                 <input type="submit" class="pull-right btn btn-sm btn-primary">
             </form>
 <br>
+
+<h3>Header</h3>
+<form enctype="multipart/form-data" action="header" method="POST">
+                <label>Update Header Image</label><br>
+                <input type="file" name="header">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="submit" class="pull-right btn btn-sm btn-primary">
+            </form>
+<br>
+
 <h3>Profile</h3>
 
 {!! Form::open(['url' => 'account/profile']) !!}

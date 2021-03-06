@@ -33,7 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'alias', 'rank_id', 'email', 'password', 'is_news_unread', 'is_banned', 'has_alias', 'avatar', 'is_sales_unread', 'pronouns'
+        'name', 'alias', 'rank_id', 'email', 'password', 'is_news_unread', 'is_banned', 'has_alias', 'avatar', 'is_sales_unread', 'pronouns', 'header'
     ];
 
     /**
@@ -314,6 +314,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getAvatar()
     {
         return ($this->avatar);
+    }
+
+    /**
+     * Displays the user's header
+     *
+     * @return string
+     */
+    public function getHeader()
+    {
+        return ($this->header);
     }
 
     /**

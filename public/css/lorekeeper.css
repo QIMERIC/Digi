@@ -272,6 +272,11 @@ main > .row {
 	}
 }
 
+.navbar-fade {
+  background-color: rgba(84, 84, 84, 0.4)!important;
+  border: none!important;
+}
+
 /* Footer */
 
 .site-footer {
