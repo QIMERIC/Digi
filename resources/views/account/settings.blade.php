@@ -31,6 +31,20 @@
         {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
     </div>
 {!! Form::close() !!}
+  <br>
+  <h3>Edit Pronouns</h3>
+{!! Form::open(['url' => 'account/pronouns']) !!}
+    <div class="form-group row">
+        <label class="col-md-2 col-form-label">Pronouns</label>
+        <div class="col-md-9">
+            {!! Form::text('pronouns', Auth::user()->profile->pronouns, ['class' => 'form-control']) !!}
+        </div>
+    </div>
+    <div class="text-right">
+        {!! Form::submit('Edit', ['class' => 'btn btn-primary']) !!}
+    </div>
+
+{!! Form::close() !!}
 
 <h3>Email Address</h3>
 

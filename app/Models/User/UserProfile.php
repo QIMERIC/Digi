@@ -16,7 +16,7 @@ class UserProfile extends Model
      * @var array
      */
     protected $fillable = [
-        'text', 'parsed_text'
+        'text', 'parsed_text', 'pronouns'
     ];
 
     /**
@@ -34,15 +34,15 @@ class UserProfile extends Model
     protected $table = 'user_profiles';
 
     /**********************************************************************************************
-    
+
         RELATIONS
 
     **********************************************************************************************/
-    
+
     /**
      * Get the user this profile belongs to.
      */
-    public function user() 
+    public function user()
     {
         return $this->belongsTo('App\Models\User\User');
     }
