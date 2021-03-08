@@ -57,10 +57,10 @@
                     <span class="badge badge-success float-right" data-toggle="tooltip" title="This user has not owned any characters from this world before.">FTO</span>
                   @endif
                 </h1>
-                <p>{!! $user->profile->parsed_text !!}</p>
                 <p>@if($user->is_banned)
                     <div class="alert alert-danger">This user has been banned.</div>
                 @endif</p>
+                <p>{!! $user->profile->parsed_text !!}</p>
               </div>
             </div>
           </div>
@@ -68,10 +68,45 @@
 
       </div>
     </div>
+    <h2>
+    <a href="{{ $user->url.'/characters' }}">Characters</a>
+    @if(isset($sublists) && $sublists->count() > 0)
+        @foreach($sublists as $sublist)
+        / <a href="{{ $user->url.'/sublist/'.$sublist->key }}">{{ $sublist->name }}</a>
+        @endforeach
+    @endif
+</h2>
+
+<div class="row no-gutters">
+  <div class="col">
+    @foreach($characters->take(4)->get()->chunk(4) as $chunk)
+      <div class="row mb-4">
+        @foreach($chunk as $character)
+            <div class="col-md-3 col-6 text-center">
+                <div>
+                    <a href="{{ $character->url }}"><img src="{{ $character->image->thumbnailUrl }}" class="img-thumbnail" /></a>
+                </div>
+                <div class="mt-1">
+                    <a href="{{ $character->url }}" class="h5 mb-0"> @if(!$character->is_visible) <i class="fas fa-eye-slash"></i> @endif {{ $character->fullName }}</a>
+                </div>
+            </div>
+        @endforeach
+      </div>
+    @endforeach
+      <div class="text-right"><a href="{{ $user->url.'/characters' }}">View all...</a></div>
+  </div>
+
+  <div class="col-3">
+    <a href="{{ $user->url.'/inventory' }}" class="btn btn-primary w-100 mb-2">Inventory</a>
+    <a href="{{ $user->url.'/bank' }}" class="btn btn-primary w-100 mb-2">Bank</a>
+  </div>
+
     </div>
   </div>
 </div>
 </div>
+
+<br><br>
 
 @comments(['model' => $user->profile,
         'perPage' => 5

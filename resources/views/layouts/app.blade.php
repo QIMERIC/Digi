@@ -73,14 +73,14 @@
     <div id="app">
         <div class="site-header-image" id="header" style="background-image: url('{{ asset('images/header.png') }}');"></div>
         @include('layouts._nav')
-        <nav id="sidebar" class="navbar navbar-expand-md" style="background-color:rgba(84, 84, 84, 0.4);color:white!important;border:none;"><div class="container-fluid">@yield('sidebar')</div></nav>
+        <nav id="sidebar" class="navbar navbar-expand-md navbar-light bg-light"><div class="container-fluid">@yield('sidebar')</div></nav>
         @if ( View::hasSection('sidebar') )
 			<div class="site-mobile-header bg-secondary"><a href="#" class="btn btn-sm btn-outline-light" id="mobileMenuButton">Menu <i class="fas fa-caret-right ml-1"></i></a></div>
 		@endif
 
         <main class="container-fluid">
             <div class="row">
-                <div class="col-lg-8 p-4" style="margin:auto;">
+                <div class="col-lg-8 p-4" style="margin-left:auto;margin-right:auto;">
                   @if(Auth::check() && !Config::get('lorekeeper.extensions.navbar_news_notif'))
                       @if(Auth::user()->is_news_unread)
                           <div class="alert alert-info"><a href="{{ url('news') }}">There is a new news post!</a></div>
