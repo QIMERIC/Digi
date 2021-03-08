@@ -1,12 +1,8 @@
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ $user->url }}">{{ Illuminate\Support\Str::limit($user->name, 10, $end='...') }}</a>
+                    <a class="nav-link" href="{{ $user->url }}">{{ Illuminate\Support\Str::limit($user->name, 15, $end='...') }}</a>
                 </li>
                     <li class="nav-item dropdown">
                         <a id="galleryDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -58,6 +54,8 @@
                           <a class="dropdown-item" href="{{ $user->url.'/submissions' }}" class="{{ set_active($user->url.'/submissions*') }}">Submimissions</a>
                         </div>
                     </li>
+
+                    <li class="nav-link {{ $user->url.'/forum*' }}" href="{{ $user->url.'/forum' }}">Forum Posts</li>
 
                     @if(Auth::check() && Auth::user()->hasPower('edit_user_info') && Auth::user()->canEditRank($user->rank))
                         <li class="nav-item">
