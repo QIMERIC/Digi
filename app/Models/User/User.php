@@ -345,7 +345,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function getForumCountAttribute()
     {
-        return Comment::where('commentable_type','App\Models\Forum')->count();
+        return Comment::where('commentable_type','App\Models\Forum')->where('commenter_id',$this->id)->count();
     }
 
     /**********************************************************************************************
