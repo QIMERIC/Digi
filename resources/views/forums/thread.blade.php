@@ -29,13 +29,14 @@
 
 
 
-<div class="border mb-2 row no-gutters" style="border-style:double!important; border-width:3px!important;clear:both;">
-    <div class="col-md-2 text-center border-md-right border-bottom border-md-bottom-0">
-        <img class="mt-2 mw-100" src="/images/avatars/{{ $thread->commenter->avatar }}" style="max-width:100px; max-height:100px; border-radius:50%;" alt="{{ $thread->commenter->name }} Avatar">
-        <h5>{!! $thread->commenter->displayName !!}</h5>
-        <p>@auth <a href="{{ $thread->commenter->url}}/forum"> @endauth{!! $thread->commenter->forumCount !!} Posts @auth </a>@endauth</p>
+<div class="mb-2 row no-gutters" style="clear:both;">
+    <div class="col-md-2 text-center" style="background-image:url(https://cdn.discordapp.com/attachments/769629553311744000/818559913676111892/230.png);margin-right:1em;background-repeat:no-repeat;">
+        <img class="my-2 mw-100" src="/images/avatars/{{ $thread->commenter->avatar }}" style="max-width:150px; max-height:150px; border-radius:50%;border: solid white 5px;" alt="{{ $thread->commenter->name }} Avatar">
+        <div class="pb-0 mb-2 btn btn-light bg-light">
+          <h5>{!! $thread->commenter->displayName !!}</h5>
+        </div>
     </div>
-    <div class="col-md">
+    <div class="col-md border">
         <div class="mb-2 border-bottom p-2">
             <div class="row no-gutters justify-content-between">
                 <div class="col">
@@ -75,13 +76,14 @@
 @if($replies->count())
     {!! $replies->render() !!}
     @foreach($replies as $comment)
-        <div class="border mb-2 row no-gutters">
-            <div class="col-md-3 text-center border-md-right border-bottom border-md-bottom-0">
-                <img class="mt-2 mw-100" src="/images/avatars/{{ $comment->commenter->avatar }}" style="max-width:100px; max-height:100px; border-radius:50%;" alt="{{ $comment->commenter->name }} Avatar">
-                <h5>{!! $comment->commenter->displayName !!}</h5>
-                <p>@auth <a href="{{ $comment->commenter->url}}/forum"> @endauth{!! $comment->commenter->forumCount !!} Posts @auth </a>@endauth</p>
-            </div>
-            <div class="col-md">
+        <div class="mb-2 row no-gutters">
+          <div class="col-md-2 text-center" style="background-image:url(https://cdn.discordapp.com/attachments/769629553311744000/818559913676111892/230.png);margin-right:1em;background-repeat:no-repeat;">
+              <img class="my-2 mw-100" src="/images/avatars/{{ $thread->commenter->avatar }}" style="max-width:150px; max-height:150px; border-radius:50%;border: solid white 5px;" alt="{{ $thread->commenter->name }} Avatar">
+              <div class="pb-0 mb-2 btn btn-light bg-light">
+                <h5>{!! $thread->commenter->displayName !!}</h5>
+              </div>
+          </div>
+            <div class="col-md border">
                 <div class="mb-2 border-bottom p-2">
                     <div class="row no-gutters justify-content-between">
                         <div class="col">
