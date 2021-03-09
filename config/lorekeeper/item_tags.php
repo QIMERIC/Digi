@@ -18,10 +18,16 @@ return [
         'text_color' => '#ffffff',
         'background_color' => '#f6993f'
     ],
-    
+
     'slot' => [
         'name' => 'Slot',
         'text_color' => '#ffffff',
         'background_color' => '#1fd1a7'
+    ],
+
+    'forum_border' => [
+        'name' => 'Forum Border',
+        'text_color' => '#ffffff',
+        'background_color' => '#bf7419'
     ],
 ];
