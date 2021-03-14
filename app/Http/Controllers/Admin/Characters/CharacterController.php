@@ -19,6 +19,7 @@ use App\Models\Feature\Feature;
 use App\Models\Character\CharacterTransfer;
 use App\Models\Trade;
 use App\Models\User\UserItem;
+use App\Models\Stats\Character\Stat;
 
 use App\Services\CharacterManager;
 use App\Services\CurrencyManager;
@@ -64,7 +65,8 @@ class CharacterController extends Controller
             'subtypes' => ['0' => 'Pick a Species First'],
             'features' => Feature::orderBy('name')->pluck('name', 'id')->toArray(),
             'isMyo' => false,
-            'characterOptions' => [null => 'Unbound'] + Character::visible()->myo(0)->orderBy('slug','ASC')->get()->pluck('fullName','id')->toArray()
+            'characterOptions' => [null => 'Unbound'] + Character::visible()->myo(0)->orderBy('slug','ASC')->get()->pluck('fullName','id')->toArray(),
+            'stats' => Stat::orderBy('name')->get(),
         ]);
     }
 
@@ -82,7 +84,8 @@ class CharacterController extends Controller
             'subtypes' => ['0' => 'Pick a Species First'],
             'features' => Feature::orderBy('name')->pluck('name', 'id')->toArray(),
             'isMyo' => true,
-            'characterOptions' => [null => 'Unbound'] + Character::visible()->myo(0)->orderBy('slug','ASC')->get()->pluck('fullName','id')->toArray()
+            'characterOptions' => [null => 'Unbound'] + Character::visible()->myo(0)->orderBy('slug','ASC')->get()->pluck('fullName','id')->toArray(),
+            'stats' => Stat::orderBy('name')->get(),
         ]);
     }
 
@@ -118,7 +121,7 @@ class CharacterController extends Controller
             'designer_id', 'designer_url',
             'artist_id', 'artist_url',
             'species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data',
-            'image', 'thumbnail', 'image_description', 'parent_id'
+            'image', 'thumbnail', 'image_description', 'parent_id', 'stats'
         ]);
         if ($character = $service->createCharacter($data, Auth::user())) {
             flash('Character created successfully.')->success();
@@ -148,7 +151,7 @@ class CharacterController extends Controller
             'designer_id', 'designer_url',
             'artist_id', 'artist_url',
             'species_id', 'subtype_id', 'rarity_id', 'feature_id', 'feature_data',
-            'image', 'thumbnail', 'parent_id'
+            'image', 'thumbnail', 'parent_id', 'stats'
         ]);
         if ($character = $service->createCharacter($data, Auth::user(), true)) {
             flash('MYO slot created successfully.')->success();

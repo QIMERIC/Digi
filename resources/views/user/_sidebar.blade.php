@@ -39,6 +39,7 @@
                             <a class="dropdown-item" href="{{ $user->url.'/myos' }}" class="{{ set_active('user/'.$user->name.'/myos*') }}">MYO Slots</a>
                             <a class="dropdown-item" href="{{ $user->url.'/inventory' }}" class="{{ set_active('user/'.$user->name.'/inventory*') }}">Inventory</a>
                             <a class="dropdown-item" href="{{ $user->url.'/bank' }}" class="{{ set_active('user/'.$user->name.'/bank*') }}">Bank</a>
+                            <a href="{{ $user->url.'/level' }}" class="dropdown-item {{ set_active('user/'.$user->name.'/level*') }}">Level-Logs</a>
                         </div>
                     </li>
 

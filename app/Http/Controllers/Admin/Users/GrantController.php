@@ -19,6 +19,7 @@ use App\Models\Submission\Submission;
 use App\Models\Character\Character;
 use App\Services\CurrencyManager;
 use App\Services\InventoryManager;
+use App\Services\Stats\ExperienceManager;
 
 use App\Http\Controllers\Controller;
 
@@ -125,4 +126,28 @@ class GrantController extends Controller
         ]);
     }
 
+    /**
+     * Grants or removes exp (show)
+     */
+    public function getExp()
+    {
+        return view('admin.grants.exp', [
+            'users' => User::orderBy('id')->pluck('name', 'id'),
+        ]);
+    }
+
+    /**
+     * Grants or removes exp
+     */
+    public function postExp(Request $request, ExperienceManager $service)
+    {
+        $data = $request->only(['names', 'quantity', 'data']);
+        if($service->grantExp($data, Auth::user())) {
+            flash('EXP granted successfully.')->success();
+        }
+        else {
+            foreach($service->errors()->getMessages()['error'] as $error) flash($error)->error();
+        }
+        return redirect()->back();
+    }
 }

@@ -24,3 +24,13 @@ return [
 
 
 ];
+
+     'Levels_&_Stats' => [
+         'key' => 'Levels_&_Stats',
+         'wiki_key' => 'Levels_%26_Stats',
+         'creators' => json_encode([
+             'Newt' => 'https://github.com/ne-wt/',
+         ]),
+         'version' => '1.0.0',
+     ],
+];
