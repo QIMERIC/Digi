@@ -1,5 +1,4 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto mx-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ $user->url }}">{{ Illuminate\Support\Str::limit($user->name, 15, $end='...') }}</a>
