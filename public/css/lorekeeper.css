@@ -327,7 +327,6 @@ main > .row {
 }
 .nav-tabs .nav-link {
     text-transform: uppercase;
-    font-family: Roboto Condensed, serif;
 }
 
 .display-user, .display-character {

@@ -86,126 +86,110 @@ class CharacterManager extends Service
      * @param  bool                   $isMyo
      * @return \App\Models\Character\Character|bool
      */
-    public function createCharacter($data, $user, $isMyo = false)
-    {
-        DB::beginTransaction();
+     public function createCharacter($data, $user, $isMyo = false)
+     {
+         DB::beginTransaction();
 
-        try {
-            if(!$isMyo && Character::where('slug', $data['slug'])->exists()) throw new \Exception("Please enter a unique character code.");
+         try {
+             if(!$isMyo && Character::where('slug', $data['slug'])->exists()) throw new \Exception("Please enter a unique character code.");
 
-            if(!(isset($data['user_id']) && $data['user_id']) && !(isset($data['owner_url']) && $data['owner_url'] && !(isset($data['parent_id']) && $data['parent_id']))
-                throw new \Exception("Please select an owner.");
-            if(!$isMyo)
-            {
-                if(!(isset($data['species_id']) && $data['species_id'])) throw new \Exception('Characters require a species.');
-                if(!(isset($data['rarity_id']) && $data['rarity_id'])) throw new \Exception('Characters require a rarity.');
-            }
-            if(isset($data['subtype_id']) && $data['subtype_id'])
-            {
-                $subtype = Subtype::find($data['subtype_id']);
-                if(!(isset($data['species_id']) && $data['species_id'])) throw new \Exception('Species must be selected to select a subtype.');
-                if(!$subtype || $subtype->species_id != $data['species_id']) throw new \Exception('Selected subtype invalid or does not match species.');
-            }
-            else $data['subtype_id'] = null;
+             if(!(isset($data['user_id']) && $data['user_id']) && !(isset($data['owner_alias']) && $data['owner_alias']) && !(isset($data['parent_id']) && $data['parent_id']))
+                 throw new \Exception("Please select an owner.");
+             if(!$isMyo)
+             {
+                 if(!(isset($data['species_id']) && $data['species_id'])) throw new \Exception('Characters require a species.');
+                 if(!(isset($data['rarity_id']) && $data['rarity_id'])) throw new \Exception('Characters require a rarity.');
+             }
+             if(isset($data['subtype_id']) && $data['subtype_id'])
+             {
+                 $subtype = Subtype::find($data['subtype_id']);
+                 if(!(isset($data['species_id']) && $data['species_id'])) throw new \Exception('Species must be selected to select a subtype.');
+                 if(!$subtype || $subtype->species_id != $data['species_id']) throw new \Exception('Selected subtype invalid or does not match species.');
+             }
+             else $data['subtype_id'] = null;
 
-            // Get owner info
-            $url = null;
-            $recipientId = null;
-            $alias = null;
-            if(isset($data['parent_id']) && $data['parent_id'])
-            {
-                // Find the new parent of the character
-                $parent = Character::where('id', $data['parent_id'])->first();
-                //find new owner based on parent
-                $recipient = User::find($parent->user_id);
-                if(!$recipient) $recipient = Character::where('id', $data['parent_id'])->first()->owner_alias;
-                //we dont want the child to be tradeable/transferrable...
-                $data['is_sellable'] = null;
-                $data['is_tradeable'] = null;
-                $data['is_giftable'] = null;
-            }
-            elseif(isset($data['user_id']) && $data['user_id']) $recipient = User::find($data['user_id']);
-            elseif(isset($data['owner_alias']) && $data['owner_alias']) $recipient = User::where('alias', $data['owner_alias'])->first();
+             // Get owner info
+             $recipient = null;
+             $recipientId = null;
+             $alias = null;
+             if(isset($data['parent_id']) && $data['parent_id'])
+             {
+                 // Find the new parent of the character
+                 $parent = Character::where('id', $data['parent_id'])->first();
+                 //find new owner based on parent
+                 $recipient = User::find($parent->user_id);
+                 if(!$recipient) $recipient = Character::where('id', $data['parent_id'])->first()->owner_alias;
+                 //we dont want the child to be tradeable/transferrable...
+                 $data['is_sellable'] = null;
+                 $data['is_tradeable'] = null;
+                 $data['is_giftable'] = null;
+             }
+             elseif(isset($data['user_id']) && $data['user_id']) $recipient = User::find($data['user_id']);
+             elseif(isset($data['owner_alias']) && $data['owner_alias']) $recipient = User::where('alias', $data['owner_alias'])->first();
 
-            if(is_object($recipient)) {
-                $recipientId = $recipient->id;
-                $data['user_id'] = $recipient->id;
-            }
-            else {
-                $url = $recipient;
-            }
+             if($recipient) {
+                 $recipientId = $recipient->id;
+                 $data['user_id'] = $recipient->id;
+             }
+             else {
+                 $alias = $data['owner_alias'];
+             }
 
-            // Create character
-            $character = $this->handleCharacter($data, $isMyo);
-            if(!$character) throw new \Exception("Error happened while trying to create character.");
+             // Create character
+             $character = $this->handleCharacter($data, $isMyo);
+             if(!$character) throw new \Exception("Error happened while trying to create character.");
 
-            // Create character link
-            if(isset($data['parent_id']) && $data['parent_id'])
-            {
-                CharacterLink::create([
-                    'parent_id' => $data['parent_id'],
-                    'child_id' => $character->id
-                ]);
-            }
+             // Create character link
+             if(isset($data['parent_id']) && $data['parent_id'])
+             {
+                 CharacterLink::create([
+                     'parent_id' => $data['parent_id'],
+                     'child_id' => $character->id
+                 ]);
+             }
 
-            // Create character image
-            $data['is_valid'] = true; // New image of new characters are always valid
-            $image = $this->handleCharacterImage($data, $character, $isMyo);
-            if(!$image) throw new \Exception("Error happened while trying to create image.");
+             // Create character image
+             $data['is_valid'] = true; // New image of new characters are always valid
+             $image = $this->handleCharacterImage($data, $character, $isMyo);
+             if(!$image) throw new \Exception("Error happened while trying to create image.");
 
-            // Update the character's image ID
-            $character->character_image_id = $image->id;
-            $character->save();
+             // Update the character's image ID
+             $character->character_image_id = $image->id;
+             $character->save();
 
-            // Create character stats
-            $character->level()->create([
-                'character_id' => $character->id
-            ]);
-            
-            if(isset($data['stats']))
-            {
-                foreach($data['stats'] as $key=>$stat)
-                {
-                    CharacterStat::create([
-                        'character_id' => $character->id,
-                        'stat_id' => $key,
-                        'count' => $stat,
-                    ]);
-                }
-            }
-            
-            // Add a log for the character
-            // This logs all the updates made to the character
-            $this->createLog($user->id, null, $recipientId, $url, $character->id, $isMyo ? 'MYO Slot Created' : 'Character Created', 'Initial upload', 'character');
+             // Add a log for the character
+             // This logs all the updates made to the character
+             $this->createLog($user->id, null, $recipientId, $alias, $character->id, $isMyo ? 'MYO Slot Created' : 'Character Created', 'Initial upload', 'character');
 
-            // Add a log for the user
-            // This logs ownership of the character
-            $this->createLog($user->id, null, $recipientId, $url, $character->id, $isMyo ? 'MYO Slot Created' : 'Character Created', 'Initial upload', 'user');
+             // Add a log for the user
+             // This logs ownership of the character
+             $this->createLog($user->id, null, $recipientId, $alias, $character->id, $isMyo ? 'MYO Slot Created' : 'Character Created', 'Initial upload', 'user');
 
-            // Update the user's FTO status and character count
-            if(is_object($recipient)) {
-                if(!$isMyo) {
-                    $recipient->settings->is_fto = 0; // MYO slots don't affect the FTO status - YMMV
-                }
-                $recipient->settings->save();
-            }
+             // Update the user's FTO status and character count
+             if($recipient) {
+                 if(!$isMyo) {
+                     $recipient->settings->is_fto = 0; // MYO slots don't affect the FTO status - YMMV
+                 }
+                 $recipient->settings->save();
+             }
 
-            // If the recipient has an account, send them a notification
-            if(is_object($recipient) && $user->id != $recipient->id) {
-                Notifications::create($isMyo ? 'MYO_GRANT' : 'CHARACTER_UPLOAD', $recipient, [
-                    'character_url' => $character->url,
-                ] + ($isMyo ?
-                    ['name' => $character->name] :
-                    ['character_slug' => $character->slug]
-                ));
-            }
 
-            return $this->commitReturn($character);
-        } catch(\Exception $e) {
-            $this->setError('error', $e->getMessage());
-        }
-        return $this->rollbackReturn(false);
-    }
+             // If the recipient has an account, send them a notification
+             if($recipient && $user->id != $recipient->id) {
+                 Notifications::create($isMyo ? 'MYO_GRANT' : 'CHARACTER_UPLOAD', $recipient, [
+                     'character_url' => $character->url,
+                 ] + ($isMyo ?
+                     ['name' => $character->name] :
+                     ['character_slug' => $character->slug]
+                 ));
+             }
+
+             return $this->commitReturn($character);
+         } catch(\Exception $e) {
+             $this->setError('error', $e->getMessage());
+         }
+         return $this->rollbackReturn(false);
+     }
 
     /**
      * Handles character data.
