@@ -225,6 +225,12 @@ Route::group(['prefix' => 'data', 'namespace' => 'Data', 'middleware' => 'power:
     Route::post('prompts/create', 'PromptController@postCreateEditPrompt');
     Route::post('prompts/edit/{id?}', 'PromptController@postCreateEditPrompt');
     Route::post('prompts/delete/{id}', 'PromptController@postDeletePrompt');
+
+    # Opponents
+    Route::get('opponents', 'OpponentController@getOpponentIndex');
+    Route::get('opponents/create', 'OpponentController@getOpponentCreate');
+    Route::get('opponents/edit/{id}', 'OpponentController@getOpponentEdit');
+    Route::get('opponents/delete/{id}', 'OpponentController@getOpponentDelete');
 });
 
 

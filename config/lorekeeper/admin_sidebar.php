@@ -151,7 +151,7 @@ return [
             ],
         ]
     ],
-    
+
     'Data' => [
         'power' => 'edit_data',
         'links' => [
@@ -206,6 +206,10 @@ return [
             [
                 'name' => 'Forums',
                 'url' => 'admin/forums'
+            ],
+            [
+                'name' => 'Opponents',
+                'url' => 'admin/opponents'
             ],
         ]
     ],
