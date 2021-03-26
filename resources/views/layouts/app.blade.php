@@ -39,10 +39,14 @@
     <script src="{{ asset('js/selectize.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui-timepicker-addon.js') }}"></script>
     <script src="{{ asset('js/croppie.min.js') }}"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <script src="{{ asset('js/jquery.style-my-tooltips.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+
+    <link href="{{ asset('css/style-my-tooltips.css') }}" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

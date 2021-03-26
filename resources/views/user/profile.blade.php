@@ -20,7 +20,7 @@
           <div class="card d-block card-block h-100 p-2" style="border-style:solid;border-width:0 1px 4px 1px;border-color:#e8e8e8;">
             <!---------------- USE A 200 x 200 AVATAR IMAGE ----------------------------------------->
           <img src="/images/avatars/{{ $user->avatar }}"
-          style="max-height: 210px; margin-top: -120px;" class="d-block mx-auto rounded-circle p-3 card border-0">
+          style="max-height: 210px; margin-top: -120px;" class="d-block rounded-circle p-3 card border-0">
 
             <div class="justify-content-between">
               <div class="pr-1 text-muted" style="letter-spacing: 1px;">Alias</div>
@@ -42,6 +42,7 @@
                <div>{!! $user->profile->pronouns !!}</div>
             </div>
             <hr class="my-2">
+            <a href="{{ $user->url.'/inventory' }}" class="btn btn-grad btn-fancy" title="testing">a</a>
           </div>
       </div>
       <div class="col-md-8 pr-md-4 order-md-4">
@@ -112,3 +113,11 @@
         'perPage' => 5
     ])
 @endsection
+
+<script>
+    (function($){
+        $(document).ready(function(){
+            $("[title]").style_my_tooltips();
+        });
+    })(jQuery);
+</script>

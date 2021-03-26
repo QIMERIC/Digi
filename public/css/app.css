@@ -2530,6 +2530,7 @@ textarea.form-control {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+
 @media (prefers-reduced-motion: reduce) {
   .btn {
     transition: none;
@@ -2557,6 +2558,52 @@ textarea.form-control {
 a.btn.disabled,
 fieldset:disabled a.btn {
   pointer-events: none;
+}
+
+.btn-fancy {
+  clip-path: polygon(100% 0, 100% 100%, 50% 81%, 0 100%, 0 0);
+}
+
+.btn-grad {
+    color: #fff;
+    background: rgb(174,238,202);
+    background: linear-gradient(0deg, rgba(174,238,202,1) 0%, rgba(148,187,233,1) 100%);
+    border-color: #8ce8b4;
+}
+
+.btn-grad:hover {
+  color: #fff;
+  background: rgb(174,238,202);
+  background: linear-gradient(0deg, rgba(174,238,202,1) 0%, rgba(148,187,233,1) 100%);
+  border-color: #8ce8b4;
+}
+
+.btn-grad:focus, .btn-grad.focus {
+  color: #fff;
+  background: rgb(174,238,202);
+  background: linear-gradient(0deg, rgba(174,238,202,1) 0%, rgba(148,187,233,1) 100%);
+  border-color: #8ce8b4;
+  box-shadow: 0 0 0 0.2rem rgba(56, 157, 196, 0.5);
+}
+
+.btn-grad.disabled, .btn-grad:disabled {
+  color: #fff;
+  background: rgb(174,238,202);
+  background: linear-gradient(0deg, #84d9a9 0%, #84a8d1 100%);
+  border-color: #70d49b;
+}
+
+.btn-grad:not(:disabled):not(.disabled):active, .btn-grad:not(:disabled):not(.disabled).active,
+.show > .btn-grad.dropdown-toggle {
+  color: #fff;
+  background: rgb(174,238,202);
+  background: linear-gradient(0deg, #cdf7e0 0%, #b8d3f2 100%);
+  border-color: #8ce8b4;
+}
+
+.btn-grad:not(:disabled):not(.disabled):active:focus, .btn-grad:not(:disabled):not(.disabled).active:focus,
+.show > .btn-grad.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(56, 157, 196, 0.5);
 }
 
 .btn-primary {
