@@ -69,7 +69,7 @@
 
       </div>
     </div>
-    <h2>
+<h2>
     <a href="{{ $user->url.'/characters' }}">Characters</a>
     @if(isset($sublists) && $sublists->count() > 0)
         @foreach($sublists as $sublist)
@@ -108,6 +108,55 @@
 </div>
 
 <br><br>
+
+<div class="card-deck mb-4 profile-assets">
+    <div class="card profile-currencies profile-assets-card">
+        <div class="card-body text-center">
+            <h5 class="card-title">Pets</h5>
+            <div class="card-body">
+                @if(count($pets))
+                    <div class="row">
+                        @foreach($pets as $pet)
+                            <div class="col-md-3 col-6 profile-inventory-item">
+                                @if($pet->imageUrl)
+                                <img src="{{ $pet->imageUrl }}" data-toggle="tooltip" title="{{ $pet->name }}" />
+                                @else
+                                    <p>{{ $pet->name }}</p>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                @else
+                    <div>No pets owned.</div>
+                @endif
+            </div>
+            <div class="text-right"><a href="{{ $user->url.'/pets' }}">View all...</a></div>
+        </div>
+    </div>
+    <div class="card profile-inventory profile-assets-card">
+        <div class="card-body text-center">
+            <h5 class="card-title">Armoury</h5>
+            <div class="card-body">
+                @if(count($armours))
+                    <div class="row">
+                        @foreach($armours as $armour)
+                            <div class="col-md-3 col-6 profile-inventory-item">
+                                @if($armour->imageUrl)
+                                <img src="{{ $armour->imageUrl }}" data-toggle="tooltip" title="{{ $armour->name }}" />
+                                @else
+                                    <p>{{ $armour->name }}</p>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                @else
+                    <div>No weapons or gear owned.</div>
+                @endif
+            </div>
+            <div class="text-right"><a href="{{ $user->url.'/armoury' }}">View all...</a></div>
+        </div>
+    </div>
+</div>
 
 @comments(['model' => $user->profile,
         'perPage' => 5

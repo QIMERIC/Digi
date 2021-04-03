@@ -98,6 +98,18 @@ return [
                 'name' => 'EXP Grants',
                 'url' => 'admin/grants/exp'
             ],
+            [
+                'name' => 'Pet Grants',
+                'url' => 'admin/grants/pets'
+            ],
+            [
+                'name' => 'Gear Grants',
+                'url' => 'admin/grants/gear'
+            ],
+            [
+                'name' => 'Weapon Grants',
+                'url' => 'admin/grants/weapons'
+            ],
         ]
     ],
     'Masterlist' => [
@@ -210,6 +222,27 @@ return [
             [
                 'name' => 'Opponents',
                 'url' => 'admin/opponents'
+            ],
+            [
+                'name' => 'Pets',
+                'url' => 'admin/data/pets'
+            ],
+        ]
+    ],
+    'Claymores' => [
+        'power' => 'edit_claymores',
+        'links' => [
+            [
+                'name' => 'Gear',
+                'url' => 'admin/gear'
+            ],
+            [
+                'name' => 'Weapons',
+                'url' => 'admin/weapon'
+            ],
+            [
+                'name' => 'Character Classes',
+                'url' => 'admin/character-classes'
             ],
         ]
     ],

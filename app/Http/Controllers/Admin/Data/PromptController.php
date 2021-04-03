@@ -12,6 +12,9 @@ use App\Models\Item\Item;
 use App\Models\Currency\Currency;
 use App\Models\Loot\LootTable;
 use App\Models\Raffle\Raffle;
+use App\Models\Pet\Pet;
+use App\Models\Claymore\Gear;
+use App\Models\Claymore\Weapon;
 
 use App\Services\PromptService;
 
@@ -184,6 +187,9 @@ class PromptController extends Controller
             'categories' => ['none' => 'No category'] + PromptCategory::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
             'items' => Item::orderBy('name')->pluck('name', 'id'),
             'currencies' => Currency::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id'),
+            'pets' => Pet::orderBy('name')->pluck('name', 'id'),
+            'gears' => Gear::orderBy('name')->pluck('name', 'id'),
+            'weapons' => Weapon::orderBy('name')->pluck('name', 'id'),
             'tables' => LootTable::orderBy('name')->pluck('name', 'id'),
             'raffles' => Raffle::where('rolled_at', null)->where('is_active', 1)->orderBy('name')->pluck('name', 'id'),
         ]);
@@ -204,6 +210,9 @@ class PromptController extends Controller
             'categories' => ['none' => 'No category'] + PromptCategory::orderBy('sort', 'DESC')->pluck('name', 'id')->toArray(),
             'items' => Item::orderBy('name')->pluck('name', 'id'),
             'currencies' => Currency::where('is_user_owned', 1)->orderBy('name')->pluck('name', 'id'),
+            'pets' => Pet::orderBy('name')->pluck('name', 'id'),
+            'gears' => Gear::orderBy('name')->pluck('name', 'id'),
+            'weapons' => Weapon::orderBy('name')->pluck('name', 'id'),
             'tables' => LootTable::orderBy('name')->pluck('name', 'id'),
             'raffles' => Raffle::where('rolled_at', null)->where('is_active', 1)->orderBy('name')->pluck('name', 'id'),
         ]);

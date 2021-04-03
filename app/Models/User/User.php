@@ -16,6 +16,9 @@ use App\Models\Item\ItemLog;
 use App\Models\Stats\ExpLog;
 use App\Models\Stats\StatTransferLog;
 use App\Models\Stats\LevelLog;
+use App\Models\Pet\PetLog;
+use App\Models\Claymore\GearLog;
+use App\Models\Claymore\WeaponLog;
 use App\Models\Shop\ShopLog;
 use App\Models\User\UserCharacterLog;
 use App\Models\Submission\Submission;
@@ -184,7 +187,30 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany('App\Models\Gallery\GalleryFavorite')->where('user_id', $this->id);
     }
+    
+    /** 
+     * Get the user's pets.
+     */
+    public function pets()
+    {
+        return $this->belongsToMany('App\Models\Pet\Pet', 'user_pets')->withPivot('data', 'updated_at', 'id')->whereNull('user_pets.deleted_at');
+    }
 
+    /** 
+     * Get the user's weapons.
+     */
+    public function weapons()
+    {
+        return $this->belongsToMany('App\Models\Claymore\Weapon', 'user_weapons')->withPivot('data', 'updated_at', 'id', 'character_id', 'has_image')->whereNull('user_weapons.deleted_at');
+    }
+
+    /** 
+     * Get the user's gears.
+     */
+    public function gears()
+    {
+        return $this->belongsToMany('App\Models\Claymore\Gear', 'user_gears')->withPivot('data', 'updated_at', 'id', 'character_id', 'has_image')->whereNull('user_gears.deleted_at');
+    }
     /**********************************************************************************************
 
         SCOPES
@@ -513,6 +539,60 @@ class User extends Authenticatable implements MustVerifyEmail
             $query->with('sender')->where('sender_type', 'User')->where('sender_id', $user->id)->whereNotIn('log_type', ['Staff Grant', 'Prompt Rewards', 'Claim Rewards']);
         })->orWhere(function($query) use ($user) {
             $query->with('recipient')->where('recipient_type', 'User')->where('recipient_id', $user->id)->where('log_type', '!=', 'Staff Removal');
+        })->orderBy('id', 'DESC');
+        if($limit) return $query->take($limit)->get();
+        else return $query->paginate(30);
+    }
+
+    /**
+     * Get the user's pet logs.
+     *
+     * @param  int  $limit
+     * @return \Illuminate\Support\Collection|\Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function getPetLogs($limit = 10)
+    {
+        $user = $this;
+        $query = PetLog::with('sender')->with('recipient')->with('pet')->where(function($query) use ($user) {
+            $query->where('sender_id', $user->id)->whereNotIn('log_type', ['Staff Grant', 'Prompt Rewards', 'Staff Removal']);
+        })->orWhere(function($query) use ($user) {
+            $query->where('recipient_id', $user->id);
+        })->orderBy('id', 'DESC');
+        if($limit) return $query->take($limit)->get();
+        else return $query->paginate(30);
+    }
+
+    /**
+     * Get the user's weapon logs.
+     *
+     * @param  int  $limit
+     * @return \Illuminate\Support\Collection|\Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function getWeaponLogs($limit = 10)
+    {
+        $user = $this;
+        $query = WeaponLog::with('sender')->with('recipient')->with('weapon')->where(function($query) use ($user) {
+            $query->where('sender_id', $user->id)->whereNotIn('log_type', ['Staff Grant', 'Prompt Rewards', 'Staff Removal']);
+        })->orWhere(function($query) use ($user) {
+            $query->where('recipient_id', $user->id);
+        })->orderBy('id', 'DESC');
+        if($limit) return $query->take($limit)->get();
+        else return $query->paginate(30);
+    }
+
+    /**
+     * Get the user's gear logs.
+     *
+     * @param  int  $limit
+     * @return \Illuminate\Support\Collection|\Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function getGearLogs($limit = 10)
+    {
+        $user = $this;
+        $query = GearLog::with('sender')->with('recipient')->with('gear')->where(function($query) use ($user) {
+            $query->where('sender_id', $user->id)->whereNotIn('log_type', ['Staff Grant', 'Prompt Rewards', 'Staff Removal']);
+        })->orWhere(function($query) use ($user) {
+            $query->where('recipient_id', $user->id);
         })->orderBy('id', 'DESC');
         if($limit) return $query->take($limit)->get();
         else return $query->paginate(30);

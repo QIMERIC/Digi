@@ -326,11 +326,83 @@ return [
         'message' => '<a href="{sender_url}">{sender}</a> has made a reply to your comment. <a href="comment/{comment_url}">See Reply.</a>',
         'url' => ''
     ],
+        // PET_REMOVAL
+    241 => [
+        'name' => 'Pet Removal',
+        'message' => '{pet_name} (×{pet_quantity}) was removed from your inventory by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Inventory</a>)',
+        'url' => 'pets'
+    ],
+    // PET_TRANSFER
+    242 => [
+        'name' => 'Pet Transfer',
+        'message' => 'You have received {pet_name} (×{pet_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Inventory</a>)',
+        'url' => 'pets'
+    ],
+    // FORCED_PET_TRANSFER
+    243 => [
+        'name' => 'Forced Pet Transfer',
+        'message' => '{pet_name} (×{pet_quantity}) was transferred out of your inventory by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Inventory</a>)',
+        'url' => 'pets'
+    ],
+    // PET_GRANT
+    244 => [
+        'name' => 'Pet Grant',
+        'message' => 'You have received a staff grant of {pet_name} (×{pet_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Inventory</a>)',
+        'url' => 'pets'
+    ],
     // EXP GRANT
     245 => [
         'name' => 'EXP Grant',
         'message' => 'You have received a staff grant of {quantity} EXP from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Level Area</a>)',
         'url' => 'level'
+    ],
+    // GEAR GRANT
+    250 => [
+        'name' => 'Gear Grant',
+        'message' => 'You have received a staff grant of {gear_name} (×{gear_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Armoury</a>)',
+        'url' => 'gears'
+    ],
+    // WEAPON GRANT
+    251 => [
+        'name' => 'Weapons Grant',
+        'message' => 'You have received a staff grant of {weapon_name} (×{weapon_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Armoury</a>)',
+        'url' => 'weapons'
+    ],
+    // WEAPON_REMOVAL
+    252 => [
+        'name' => 'Weapon Removal',
+        'message' => '{weapon_name} (×{weapon_quantity}) was removed from your armoury by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Armoury</a>)',
+        'url' => 'weapons'
+    ],
+    // WEAPON_TRANSFER
+    253 => [
+        'name' => 'Weapon Transfer',
+        'message' => 'You have received {weapon_name} (×{weapon_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Armoury</a>)',
+        'url' => 'weapons'
+    ],
+    // FORCED_WEAPON_TRANSFER
+    254 => [
+        'name' => 'Forced Weapon Transfer',
+        'message' => '{weapon_name} (×{weapon_quantity}) was transferred out of your armoury by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Armoury</a>)',
+        'url' => 'weapons'
+    ],
+    // GEAR_REMOVAL
+    255 => [
+        'name' => 'Gear Removal',
+        'message' => '{gear_name} (×{gear_quantity}) was removed from your armoury by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Armoury</a>)',
+        'url' => 'gears'
+    ],
+    // GEAR_TRANSFER
+    256 => [
+        'name' => 'Gear Transfer',
+        'message' => 'You have received {gear_name} (×{gear_quantity}) from <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Armoury</a>)',
+        'url' => 'gears'
+    ],
+    // FORCED_GEAR_TRANSFER
+    257 => [
+        'name' => 'Forced Gear Transfer',
+        'message' => '{gear_name} (×{gear_quantity}) was transferred out of your armoury by <a href="{sender_url}">{sender_name}</a>. (<a href="{url}">View Armoury</a>)',
+        'url' => 'gears'
     ],
     // CHARACTER_ITEM_GRANT
     501 => [

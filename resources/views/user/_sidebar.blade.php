@@ -39,6 +39,8 @@
                             <a class="dropdown-item" href="{{ $user->url.'/inventory' }}" class="{{ set_active('user/'.$user->name.'/inventory*') }}">Inventory</a>
                             <a class="dropdown-item" href="{{ $user->url.'/bank' }}" class="{{ set_active('user/'.$user->name.'/bank*') }}">Bank</a>
                             <a href="{{ $user->url.'/level' }}" class="dropdown-item {{ set_active('user/'.$user->name.'/level*') }}">Level-Logs</a>
+                            <a href="{{ $user->url.'/pets' }}" class="dropdown-item {{ set_active('user/'.$user->name.'/pets*') }}">Pets</a>
+                            <a href="{{ $user->url.'/armoury' }}" class="dropdown-item {{ set_active('user/'.$user->name.'/armoury*') }}">Armoury</a>
                         </div>
                     </li>
 
@@ -52,6 +54,7 @@
                           <a class="dropdown-item" href="{{ $user->url.'/item-logs' }}" class="{{ $user->url.'/currency-logs*' }}">Item Logs</a>
                           <a class="dropdown-item" href="{{ $user->url.'/currency-logs' }}" class="{{ set_active($user->url.'/currency-logs*') }}">Currency Logs</a>
                           <a class="dropdown-item" href="{{ $user->url.'/submissions' }}" class="{{ set_active($user->url.'/submissions*') }}">Submimissions</a>
+                          <a href="{{ $user->url.'/pet-logs' }}" class="dropdown-item {{ set_active($user->url.'/pet-logs*') }}">Pet Logs</a>
                         </div>
                     </li>
 

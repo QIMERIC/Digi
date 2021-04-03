@@ -48,7 +48,7 @@ class Character extends Model
         'is_sellable', 'is_tradeable', 'is_giftable',
         'sale_value', 'transferrable_at', 'is_visible',
         'is_gift_art_allowed', 'is_gift_writing_allowed', 'is_trading', 'sort',
-        'is_myo_slot', 'name', 'trade_id', 'owner_url'
+        'is_myo_slot', 'name', 'trade_id', 'owner_url', 'class_id'
     ];
 
     /**
@@ -213,6 +213,21 @@ class Character extends Model
         return $this->belongsTo('App\Models\Rarity', 'rarity_id');
     }
 
+    public function pets()
+    {
+        return $this->hasMany('App\Models\User\UserPet', 'chara_id');
+    }
+    
+    public function gear()
+    {
+        return $this->hasMany('App\Models\User\UserGear', 'character_id');
+    }
+
+    public function weapons()
+    {
+        return $this->hasMany('App\Models\User\UserWeapon', 'character_id');
+    }
+
     /**
      * Get the character's associated gallery submissions.
      */
@@ -227,6 +242,14 @@ class Character extends Model
     public function items()
     {
         return $this->belongsToMany('App\Models\Item\Item', 'character_items')->withPivot('count', 'data', 'updated_at', 'id')->whereNull('character_items.deleted_at');
+    }
+
+    /**
+     * Get the character's class
+     */
+    public function class()
+    {
+        return $this->belongsTo('App\Models\Character\CharacterClass', 'class_id');
     }
 
     /**********************************************************************************************
