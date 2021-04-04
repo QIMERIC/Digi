@@ -38,7 +38,7 @@ return [
     'item_entry_expansion' => [
         'extra_fields' => 1,
         'resale_function' => 1,
-    ]
+    ],
 
     // Character Reward Expansion - Uri
     'character_reward_expansion' => [
