@@ -91,6 +91,7 @@ class UserController extends Controller
             'sublists' => Sublist::orderBy('sort', 'DESC')->get(),
             'characters' => $characters,
             'armours' => $armours,
+            'pets' => $this->user->pets()->orderBy('user_pets.updated_at', 'DESC')->take(5)->get(),
         ]);
     }
 

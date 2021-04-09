@@ -10,6 +10,7 @@ use Illuminate\Database\Schema\Blueprint;
 
 use App\Models\User\User;
 use App\Models\Character\Character;
+use App\Models\Prompt\Prompt;
 
 class Addlevels extends Command
 {
@@ -63,7 +64,7 @@ class Addlevels extends Command
         }
         $this->line("Migrated users\n");
         $this->line("Migrating characters...");
-        
+
         $characters = Character::all();
         foreach($characters as $character)
         {
@@ -76,7 +77,7 @@ class Addlevels extends Command
         }
         $this->line("Migrated characters\n");
         $this->line("Successfully added levels!");
-        
+
         $this->line("Migrating prompts...");
         $prompts = Prompt::all();
         foreach ($prompts as $prompt)
